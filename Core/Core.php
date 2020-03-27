@@ -1,12 +1,7 @@
 <?php
 
-<<<<<<< HEAD
 namespace Core;
 
-=======
-
-namespace Core;
->>>>>>> 85e0a6e9aed9d836f0a00a3d95c640baf8664a8d
 use Router;
 
 class Core
@@ -23,7 +18,6 @@ class Core
 
 
         // METHODE DYNAMIQUE
-<<<<<<< HEAD
         $url = $_SERVER["REDIRECT_URL"];
         $arr = explode("/", $url);
         $arrError = 0;
@@ -63,36 +57,3 @@ class Core
         } */
     }
 }
-=======
-
-        $url = $_SERVER["REDIRECT_URL"];
-
-        $arr = explode("/", $url);
-
-        /* var_dump($arr); */
-        $class = ucfirst($arr[4] . "Controller");
-        $method = $arr[5] . "Action";
-        /* var_dump(class_exists($class)); */
-        /* echo "$class -> $method"; */
-        $controller = new $class();
-        $controller->$method();
-        /* var_dump($controller); */
-
-        /* $i = 0;
-        while ($i < count($arr)) {
-            if (class_exists($arr[$i])) {
-                $class = ucfirst($arr[$i] . "Controller");
-                if (method_exists($class, $arr[$i])) {
-                    $method = $arr[$i] . "Action";
-                    echo "$class -> $method";
-                    $controller = new $class();
-                    $controller->$method();
-                } else {
-                    $i++;
-                }
-            } else {
-                $i++;
-            }
-        } */
-
->>>>>>> 85e0a6e9aed9d836f0a00a3d95c640baf8664a8d
