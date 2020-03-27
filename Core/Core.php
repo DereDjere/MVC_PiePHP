@@ -1,5 +1,6 @@
 <?php
 
+<<<<<<< HEAD
 namespace Core;
 use Router;
 
@@ -47,5 +48,14 @@ class Core
                 $i++;
             }
         } */
+=======
+namespace  Core;
+
+class  Core
+{
+    public  function  run()
+    {
+        echo  __CLASS__ . " [OK]" . PHP_EOL;
+>>>>>>> 9cb7c652b9ff7e6408fb744ae6398436770da5fe
     }
 }
