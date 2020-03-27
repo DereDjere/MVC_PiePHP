@@ -1,5 +1,9 @@
 <?php
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 85e0a6e9aed9d836f0a00a3d95c640baf8664a8d
 function autoloader($class_name)
 {
     $file = str_replace('\\','/', $class_name);
@@ -15,7 +19,11 @@ function autoloader($class_name)
     }
     elseif(file_exists('./src/Model/'.$file.'.php')){
         var_dump($file);
+<<<<<<< HEAD
         include '../src/Controller/'.$file.'.php';
+=======
+        include './src/Model/'.$file.'.php';
+>>>>>>> 85e0a6e9aed9d836f0a00a3d95c640baf8664a8d
     }
 }
 
@@ -24,4 +32,9 @@ function Autoregister()
     spl_autoload_register('autoloader');
 }
 
+<<<<<<< HEAD
 Autoregister();
+=======
+Autoregister();
+
+>>>>>>> 85e0a6e9aed9d836f0a00a3d95c640baf8664a8d
