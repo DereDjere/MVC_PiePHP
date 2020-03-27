@@ -1,6 +1,6 @@
 <?php
 
-<<<<<<< HEAD
+
 function autoloader($class_name)
 {
     $file = str_replace('\\','/', $class_name);
@@ -26,5 +26,4 @@ function Autoregister()
 }
 
 Autoregister();
-=======
->>>>>>> 9cb7c652b9ff7e6408fb744ae6398436770da5fe
+
