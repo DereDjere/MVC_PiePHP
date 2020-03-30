@@ -1,16 +1,29 @@
 <?php
 
-namespace UserModel;
+namespace Model;
 
-class UserModel{
+use Core\Entity;
+
+class UserModel extends Entity{
 
     private $email;
     private $password;
 
-    function save($email, $password)
+    public function save($email, $password)
     {
         echo $email ."->>". $password;
     }
+    public function checkMail($email)
+    {
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
 
 
 }

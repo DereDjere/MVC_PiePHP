@@ -4,7 +4,7 @@ namespace Core;
 
 class Controller
 {
-    protected $_render;
+    protected static $_render;
 
     protected  function  render($view, $scope = [])
     {
@@ -19,4 +19,7 @@ class Controller
             self::$_render = ob_get_clean();
         }
     }
+    public function __destruct() {  
+        echo self::$_render;
+    }    
 }

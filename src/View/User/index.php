@@ -6,22 +6,8 @@
     <title>Document</title>
 </head>
 <body>
-<pre>
-<?php
-var_dump($_POST);
-    echo $_POST['email'];
-?>
-</pre>
-<pre>
-<?php
-var_dump($_GET);
-    echo $_GET;
-?>
-</pre>
-<pre>
-<?php
-    echo $_SERVER;
-?>
-</pre>
+
+<h1>Bienvenue ceci est un test</h1>
+
 </body>
 </html>
