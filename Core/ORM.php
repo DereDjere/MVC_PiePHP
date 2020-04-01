@@ -12,15 +12,17 @@ class ORM
     }
     public function create($table, $fields)
     {   
-        echo "read ORM";
-        $db = $this->DBase->connectBdd();
+        
+        echo $table . "<br>";
+        var_dump($fields);
+        /* $db = $this->DBase->connectBdd();
         $sth = $db->query('INSERT INTO '. $table .' VALUES ('.$fields['email'].','.$fields['password'].')');
         $fetch = $sth->fetchAll(\PDO::FETCH_ASSOC);
-        return $fetch; 
+        return $fetch;  */
     }
     public function read($table, $id)
     {
-        echo "read ORM";
+
         $db = $this->DBase->connectBdd();
         $sth = $db->query('SELECT * FROM '.$table.' WHERE id='.$id.')');
         $fetch = $sth->fetchAll(\PDO::FETCH_ASSOC);

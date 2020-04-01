@@ -42,7 +42,7 @@ class Core
                         $arrError += 1;
                         /* echo $arrError; */
                         if ($arrError == count(($arr) - 1)) {
-                            echo "test";
+                            echo "404";
                             /* $controller = new Controller\UserController;
                             $controller->Error404(); */
                         }
@@ -51,7 +51,7 @@ class Core
                     $arrError += 1;
                     /* echo $arrError; */
                     if ($arrError === count($arr)) {
-                        echo "test";
+                        echo "404";
                         /* $controller = new UserController;
                         $controller->Error404(); */
                     }

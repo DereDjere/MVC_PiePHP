@@ -2,17 +2,17 @@
 
 /* namespace Controller; */
 
-use Core\Controller;
-use Core\Core;
+/* use Core\Controller;
+use Core\Core; */
 /* use Core\Entity; */
-use Model\UserModel;
+/* use Model\UserModel; */
 
-class UserController extends Controller
+class UserController extends Core\Controller
 {
 
     public function __construct()
     {
-        $this->request = Core::Request();
+        $this->request = Core\Core::Request();
 
     }
 
@@ -34,15 +34,11 @@ class UserController extends Controller
     }
     public function registerAction()
     {
-        echo "RegisterActionPAGE";
-        /* var_dump($_POST); */
+      
         $params = $this->request;
         if ($params['email'] && $params['pwd']) {
-            echo 'entrer';
-            $model = new UserModel($params);
-            /* $model->checkMail($_POST['email']); */
-            $model->save($params['email'], $params['pwd']);
-            $model->create();
+            $model = new Model\UserModel($params);
+        
         }
         elseif(empty($_POST['email']) && empty($_POST['pwd']))
         {

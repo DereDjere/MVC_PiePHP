@@ -2,13 +2,15 @@
 
 namespace Model;
 
-use Core\Entity;
 
-class UserModel extends Entity{
+/* use \Core\Entity; */
 
-    private $email;
-    private $password;
+class UserModel extends \Core\Entity{
 
+    /* public function __construct($params)
+    {
+        var_dump($params);
+    } */
     public function save($email, $password)
     {
         echo $email ."->>". $password;

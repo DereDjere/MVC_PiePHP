@@ -1,28 +1,35 @@
 <?php
 
 namespace Core;
-
-use Core\ORM;
+/* 
+use Core\ORM; */
 
 class Entity 
 {
     public function __construct($params)
     {   
-        var_dump($params);
-        echo 'test';
-        /* $class = get_class($this); */
-        /* ORM::read($params, $id); */
+        var_dump("reussi");
+        /* $this->class = get_class($this);
+        $this->params = $params;
+        if($params['id'])
+        {
+            ORM::read($this->class,$this->params['id']);
+        }
+        else
+        {
+            Entity::create($this->class,$this->params);
+        } */
+        
         
         /* $this->class = $class;
         var_dump($this->class); */
 
     }
-    public function create()
+    public static function create($class, $params)
     {
         // Determiner un class grace a getclass plus au dessus
         // Appel de L'ORM pour abstraire
-        var_dump('createEntity');
-        ORM::create(lcfirst(str_replace('Controller', '', $this->class)), $this);
+        ORM::create(lcfirst(str_replace('Controller', '', $class)), $params);
     }
     public function read()
     {
