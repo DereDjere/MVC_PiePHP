@@ -3,17 +3,18 @@
 namespace Core;
 
 use Core\Router;
+use UserController;
 
 class Core
 {
-    
+
     public  function  run()
     {
-       /*  echo  __CLASS__ . " [OK]" . PHP_EOL; */
+        /*  echo  __CLASS__ . " [OK]" . PHP_EOL; */
 
         // METHODE STATIC
 
-        
+
         // METHODE DYNAMIQUE
         $url = $_SERVER["REDIRECT_URL"];
         $arr = explode("/", $url);
@@ -40,15 +41,19 @@ class Core
                     } else {
                         $arrError += 1;
                         /* echo $arrError; */
-                        if ($arrError == count(($arr) -1)) {
-                            include "../src/View/Error/404.php";
+                        if ($arrError == count(($arr) - 1)) {
+                            echo "test";
+                            /* $controller = new Controller\UserController;
+                            $controller->Error404(); */
                         }
                     }
                 } else {
                     $arrError += 1;
                     /* echo $arrError; */
                     if ($arrError === count($arr)) {
-                        include_once '../src/View/Error/404.php';
+                        echo "test";
+                        /* $controller = new UserController;
+                        $controller->Error404(); */
                     }
                 }
             }
@@ -56,16 +61,12 @@ class Core
     }
     public function Request()
     {
-        if($_POST)
-        {
-            $secupost = htmlspecialchars(trim(stripslashes($_POST)));
+        if ($_POST) {
+            $secupost = array('email' => htmlspecialchars(trim(stripslashes($_POST['email']))),'pwd' => $_POST['pwd']);
             return $secupost;
-        }
-        else if($_GET)
-        {
+        } else if ($_GET) {
             $secuget = htmlspecialchars(trim(stripslashes($_POST)));
             return $secuget;
         }
-        
     }
 }

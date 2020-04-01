@@ -1,6 +1,6 @@
 <?php
-/* 
-namespace Controller; */
+
+namespace Controller;
 
 use Core\Controller;
 use Core\Core;

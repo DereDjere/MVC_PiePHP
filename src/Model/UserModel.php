@@ -13,7 +13,7 @@ class UserModel extends Entity{
     {
         echo $email ."->>". $password;
     }
-    public function checkMail($email)
+    /* public function checkMail($email)
     {
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             return true;
@@ -21,8 +21,10 @@ class UserModel extends Entity{
         else
         {
             return false;
-        }
-    }
+        } 
+
+        var_dump('checkmail');
+    } */
     
 
 

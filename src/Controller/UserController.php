@@ -4,7 +4,7 @@
 
 use Core\Controller;
 use Core\Core;
-use Core\Entity;
+/* use Core\Entity; */
 use Model\UserModel;
 
 class UserController extends Controller
@@ -12,7 +12,8 @@ class UserController extends Controller
 
     public function __construct()
     {
-        $request = Core::Request();
+        $this->request = Core::Request();
+
     }
 
     public function registerpageAction()
@@ -27,16 +28,23 @@ class UserController extends Controller
     {
         $this->render('login');
     }
+    public function Error404()
+    {
+        $this->render('404');
+    }
     public function registerAction()
     {
-        if ($_POST['email'] && $_POST['password']) {
-            $model = new UserModel($_POST);
-            $model->checkMail($_POST['email']);
-            $model->save($_POST['email'], $_POST['password']);
+        echo "RegisterActionPAGE";
+        /* var_dump($_POST); */
+        $params = $this->request;
+        if ($params['email'] && $params['pwd']) {
+            echo 'entrer';
+            $model = new UserModel($params);
+            /* $model->checkMail($_POST['email']); */
+            $model->save($params['email'], $params['pwd']);
             $model->create();
-            $this->render('post');
         }
-        elseif(empty($_POST['email']) && empty($_POST['password']))
+        elseif(empty($_POST['email']) && empty($_POST['pwd']))
         {
             $this->render('register');
         }
