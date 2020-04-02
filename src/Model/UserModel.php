@@ -13,7 +13,7 @@ class UserModel extends \Core\Entity{
     } */
     public function save($email, $password)
     {
-        echo $email ."->>". $password;
+        /* echo $email ."->>". $password; */
     }
     /* public function checkMail($email)
     {

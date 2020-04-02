@@ -7,12 +7,12 @@ use Core\Core; */
 /* use Core\Entity; */
 /* use Model\UserModel; */
 
-class UserController extends Core\Controller
+class UserController extends \Core\Controller
 {
 
     public function __construct()
     {
-        $this->request = Core\Core::Request();
+        $this->request = \Core\Request::Request();
 
     }
 
@@ -36,11 +36,13 @@ class UserController extends Core\Controller
     {
       
         $params = $this->request;
-        if ($params['email'] && $params['pwd']) {
-            $model = new Model\UserModel($params);
+        /* var_dump($params); */
+        if ($params['email'] && $params['password']) {
+            
+            $model = new \Model\UserModel($params);
         
         }
-        elseif(empty($_POST['email']) && empty($_POST['pwd']))
+        elseif(empty($_POST['email']) && empty($_POST['paswword']))
         {
             $this->render('register');
         }

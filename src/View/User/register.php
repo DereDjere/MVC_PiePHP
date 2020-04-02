@@ -3,7 +3,7 @@
         <label for="email">Enter your email:</label>
         <input type="email" id="email" name="email">
         <label for="pwd">Password:</label>
-        <input type="password" id="pwd" name="pwd">
+        <input type="password" id="password" name="password">
         <div class="form-example">
             <input type="submit" value="Subscribe!">
         </div>

@@ -1,32 +1,34 @@
 <?php
 
 namespace Core;
-use Core\bdd;
+use \Core\bdd;
 
 class ORM
 {
-    public function __construct()
-    {
-        $DBase = new bdd;
-        
-    }
+    private $db;
+
     public function create($table, $fields)
     {   
+        /* $table = str_replace('',,$tableclass)
         
         echo $table . "<br>";
-        var_dump($fields);
-        /* $db = $this->DBase->connectBdd();
-        $sth = $db->query('INSERT INTO '. $table .' VALUES ('.$fields['email'].','.$fields['password'].')');
+        var_dump($fields); */
+        echo $table . "<br>";
+        $DBase = new bdd;
+        $db = $DBase->ConnectBDD();
+        $colonne = implode(',',array_keys($fields));
+        $value = implode(',',$fields);     
+        $sth = $db->query('INSERT INTO '. $table .'('.$colonne.') VALUES ('.$fields['email'].','.$fields['pwd'].')');
         $fetch = $sth->fetchAll(\PDO::FETCH_ASSOC);
-        return $fetch;  */
+        return "<h1>Compte cree</h1>";
     }
     public function read($table, $id)
     {
 
-        $db = $this->DBase->connectBdd();
-        $sth = $db->query('SELECT * FROM '.$table.' WHERE id='.$id.')');
+        /* $db = $this->DBase->connectBdd(); */
+        /* $sth = $db->query('SELECT * FROM '.$table.' WHERE id='.$id.')');
         $fetch = $sth->fetchAll(\PDO::FETCH_ASSOC);
-        return $fetch; 
+        return $fetch;  */
     }
     public function update()
     {

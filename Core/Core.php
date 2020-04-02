@@ -2,8 +2,8 @@
 
 namespace Core;
 
-use Core\Router;
-use UserController;
+/* use Core\Router; */
+
 
 class Core
 {
@@ -23,8 +23,14 @@ class Core
         if ($route != null) {
             $control = ucfirst($route['controller']) . 'Controller';
             $action = $route['action'] . 'Action';
+            echo $control . '<br>';
+            echo $action . '<br>';
+            /* var_dump(class_exists(ucfirst($control))); */
+        
             if (class_exists(ucfirst($control))) {
+                
                 if (method_exists($control, $action)) {
+                    /* echo "method exist"; */
                     $controller = new $control();
                     $controller->$action();
                 }
@@ -36,6 +42,7 @@ class Core
                     $i += 1;
                     $method = $arr[$i] . "Action";
                     if (method_exists($class, $method)) {
+                        /* echo "method exist"; */
                         $controller = new $class();
                         $controller->$method();
                     } else {
@@ -59,14 +66,5 @@ class Core
             }
         }
     }
-    public function Request()
-    {
-        if ($_POST) {
-            $secupost = array('email' => htmlspecialchars(trim(stripslashes($_POST['email']))),'pwd' => $_POST['pwd']);
-            return $secupost;
-        } else if ($_GET) {
-            $secuget = htmlspecialchars(trim(stripslashes($_POST)));
-            return $secuget;
-        }
-    }
+    
 }

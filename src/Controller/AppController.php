@@ -7,9 +7,9 @@ use Core\Core;
 
 class AppController extends Controller
 {
-    public function __construct()
+    /* public function __construct()
     {
         $request = Core::Request();
-    }
+    } */
 
 }
