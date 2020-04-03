@@ -13,11 +13,10 @@ class UserController extends \Core\Controller
     public function __construct()
     {
         $this->request = \Core\Request::Request();
-
     }
 
     public function registerpageAction()
-    {   
+    {
         $this->render('register');
     }
     public function indexAction()
@@ -34,17 +33,38 @@ class UserController extends \Core\Controller
     }
     public function registerAction()
     {
-      
+
         $params = $this->request;
-        /* var_dump($params); */
         if ($params['email'] && $params['password']) {
-            
-            $model = new \Model\UserModel($params);
-        
+            if (!empty($_POST['email']) && !empty($_POST['password'])) {
+                $model = new \Model\UserModel($params);
+                $id = $model->create();
+                self::$_render = "Votre  compte a ete  cree." . PHP_EOL;
+            }
+        } else {
         }
-        elseif(empty($_POST['email']) && empty($_POST['paswword']))
+    }
+    public function updateAction()
+    {
+        $params = $this->request;
+        if ($params['email']) {
+            if (!empty($_POST['email'])) {
+                $model = new \Model\UserModel($params);
+                $model->update();
+                self::$_render = "Votre email a ete  modifier." . PHP_EOL;
+            }
+        }
+        elseif($params['password'])
         {
-            $this->render('register');
+            if (!empty($_POST['password'])) {
+                $model = new \Model\UserModel($params);
+                $model->update();
+                self::$_render = "Votre mot de passe a ete modifier." . PHP_EOL;
+            }
+        } 
+        else 
+        {
+
         }
     }
 }

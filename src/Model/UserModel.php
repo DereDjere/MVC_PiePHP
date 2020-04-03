@@ -11,7 +11,7 @@ class UserModel extends \Core\Entity{
     {
         var_dump($params);
     } */
-    public function save($email, $password)
+    public function save()
     {
         /* echo $email ."->>". $password; */
     }

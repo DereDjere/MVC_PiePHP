@@ -9,6 +9,7 @@ function autoloader($class_name)
     if(file_exists($file.'.php'))
     {   
         /* var_dump($file); */
+        echo "<h3>$file</h3>";
         require_once $file . '.php';
     }
     elseif(file_exists('src/Controller/'.$file.'.php')){

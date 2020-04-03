@@ -1,30 +1,34 @@
 <?php
 
 namespace Core;
-use \Core\bdd;
+
+use Core\Database;
+use PDO;
 
 class ORM
 {
-    private $db;
-
+    public function __construct()
+    {
+        $this->db = new \Core\Database();
+        $this->connect = $this->db->ConnectBDD();
+    }
     public function create($table, $fields)
     {   
-        /* $table = str_replace('',,$tableclass)
-        
-        echo $table . "<br>";
-        var_dump($fields); */
-        echo $table . "<br>";
-        $DBase = new bdd;
-        $db = $DBase->ConnectBDD();
-        $colonne = implode(',',array_keys($fields));
-        $value = implode(',',$fields);     
-        $sth = $db->query('INSERT INTO '. $table .'('.$colonne.') VALUES ('.$fields['email'].','.$fields['pwd'].')');
-        $fetch = $sth->fetchAll(\PDO::FETCH_ASSOC);
-        return "<h1>Compte cree</h1>";
+        var_dump($fields);
+        $colonne = implode(',', array_keys($fields));
+        $value = implode("','", $fields);
+        $sth = $this->connect->prepare("INSERT INTO $table ($colonne) VALUES ('$value')");
+        $sth->execute();
+        /* $fetch = $sth->fetchAll(PDO::FETCH_ASSOC); */
+        /* return $fetch; */
+        return $sth->lastInsertId();
     }
     public function read($table, $id)
     {
-
+        $sth = $this->connect->prepare("SELECT * FROM $table WHERE id = $id");
+        $sth->execute();
+        $resultat = $sth->fetchAll(PDO::FETCH_ASSOC);
+        return $resultat;
         /* $db = $this->DBase->connectBdd(); */
         /* $sth = $db->query('SELECT * FROM '.$table.' WHERE id='.$id.')');
         $fetch = $sth->fetchAll(\PDO::FETCH_ASSOC);

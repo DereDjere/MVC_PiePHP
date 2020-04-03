@@ -2,7 +2,10 @@
 
 namespace Core;
 
-class bdd
+use PDO;
+use PDOException;
+
+class Database
 {
 
     private $bdd;
@@ -11,15 +14,15 @@ class bdd
     {
 
         try {
-            $this->bdd = new \PDO('mysql:host=localhost;dbname=MVC_PiePHP', "root", "root");
-            $this->bdd->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            $this->bdd = new PDO('mysql:host=localhost;dbname=MVC_PiePHP', "root", "root");
+            $this->bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
          } 
-         catch (\PDOException $error) { //
+         catch (PDOException $error) { //
             echo "Error: " . $error->getMessage();
         }
     }
 
-    function ConnectBDD()
+    public function ConnectBDD()
     {
         return $this->bdd;
     }
