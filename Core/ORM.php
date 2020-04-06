@@ -21,7 +21,7 @@ class ORM
         $sth->execute();
         /* $fetch = $sth->fetchAll(PDO::FETCH_ASSOC); */
         /* return $fetch; */
-        return $sth->lastInsertId();
+        return $this->connect->lastInsertId();
     }
     public function read($table, $id)
     {
@@ -34,13 +34,52 @@ class ORM
         $fetch = $sth->fetchAll(\PDO::FETCH_ASSOC);
         return $fetch;  */
     }
-    public function update()
+    public function update($table, $fields)
     {
+        $id = $fields['id'];
+        unset($id);
+        foreach($fields as $key => $value)
+        {
+            $request = $key . "= \"" . $value ."\",";
+        }
+        $sth = $this->connect->prepare("UPDATE $table SET $request WHERE id = $id");
+        $sth->execute();
+        $resultat = $sth->fetchAll(PDO::FETCH_ASSOC);
+        return true;
     }
-    public function delete()
-    {
+    public function delete($table, $fields)
+    {   
+        $id = $fields['id'];
+        unset($id);
+        $sth = $this->connect->prepare("UPDATE $table SET disable = '1' WHERE id = $id");
+        $sth->execute();
+        $resultat = $sth->fetchAll(PDO::FETCH_ASSOC);
+        return true;
     }
-    public function read_all()
+    public function read_all($table)
     {
+        $sth = $this->connect->prepare("SELECT * FROM $table");
+        $sth->execute();
+        $resultat = $sth->fetchAll(PDO::FETCH_ASSOC);
+        return $resultat;
+    }
+    public function find($table, $parametre = array(
+        'WHERE' => '',
+        'ORDER BY' => '',
+        'LIMIT' => ''
+    ))
+    {
+        foreach($parametre as $key => $value)
+        {
+            if(!empty($value))
+            {
+                $params = "$key $value";
+            }
+        }
+        echo "$table";
+        $sth = $this->connect->prepare("SELECT * FROM $table $params");
+        $sth->execute();
+        $resultat = $sth->fetchAll(PDO::FETCH_ASSOC);
+        return $resultat;
     }
 }

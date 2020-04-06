@@ -9,8 +9,9 @@ Class Request
         if ($_POST) {
             $secupost = array('email' => htmlspecialchars(trim(stripslashes($_POST['email']))),'password' => $_POST['password']);
             return $secupost;
-        } else if ($_GET) {
-            $secuget = htmlspecialchars(trim(stripslashes($_POST)));
+        } 
+        if ($_GET) {
+            $secuget = htmlspecialchars(trim(stripslashes($_GET)));
             return $secuget;
         }
     }

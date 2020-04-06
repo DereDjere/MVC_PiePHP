@@ -16,6 +16,10 @@ class Entity
             $orm = new ORM();
             $class = str_replace('\\', '', get_class($this));
             $result = $this->orm->read(lcfirst(str_replace('Model', '', $class . 's')), $this->params['id']);
+            foreach($result as $key => $value)
+            {
+                $this->$key = $value;
+            }
         } else {
             foreach($params as $key => $value)
             {
@@ -38,19 +42,38 @@ class Entity
     }
     public function read()
     {
-        
+        $orm = new ORM();
+        $class = str_replace('\\', '', get_class($this));
+        $res = $orm->read(lcfirst(str_replace('Model', '', $class . 's')),get_object_vars($this));
+        return $res;
     }
     public function update()
     {
         $orm = new ORM();
         $class = str_replace('\\', '', get_class($this));
         $res = $orm->update(lcfirst(str_replace('Model', '', $class . 's')),get_object_vars($this));
-        return true;
+        return $res;
     }
     public function delete()
     {
+        $orm = new ORM();
+        $class = str_replace('\\', '', get_class($this));
+        $res = $orm->delete(lcfirst(str_replace('Model', '', $class . 's')),get_object_vars($this));
+        return $res;
     }
     public function read_all()
     {
+        $orm = new ORM();
+        $class = str_replace('\\', '', get_class($this));
+        $res = $orm->read_all(lcfirst(str_replace('Model', '', $class . 's')));
+        return $res;
+    }
+    public function find()
+    {
+        $orm = new ORM();
+        $class = str_replace('\\', '', get_class($this));
+        $res = $orm->find(lcfirst(str_replace('Model', '', $class . 's')));
+        echo "$class";
+        return $res;
     }
 }
