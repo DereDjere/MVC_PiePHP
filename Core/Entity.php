@@ -12,6 +12,8 @@ class Entity
         
         /* var_dump($this->class); */
         /* var_dump($params); */
+        
+
         if (array_key_exists('id', $params)) {
             $orm = new ORM();
             $class = str_replace('\\', '', get_class($this));
@@ -26,11 +28,27 @@ class Entity
                 $this->$key = $value;
             }
         }
+        
 
 
         /* $this->class = $class; */
         
     }
+    public function HasMany()
+    {
+        // VOIR SI POSSIBILITE DE FUNCTION POUR HASMANY
+        $orm = new ORM();
+
+    }
+    public function HasOne()
+    {
+        // VOIR SI POSSIBILITE DE FUNCTION POUR HasOne
+    }
+    public function ManyToMany()
+    {
+        // VOIR SI POSSIBILITE DE FUNCTION POUR ManyToMany
+    }
+
     public function create()
     {
         // Determiner un class grace a getclass plus au dessus
@@ -73,7 +91,6 @@ class Entity
         $orm = new ORM();
         $class = str_replace('\\', '', get_class($this));
         $res = $orm->find(lcfirst(str_replace('Model', '', $class . 's')));
-        echo "$class";
         return $res;
     }
 }

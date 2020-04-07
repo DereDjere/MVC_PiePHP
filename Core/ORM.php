@@ -76,7 +76,6 @@ class ORM
                 $params = "$key $value";
             }
         }
-        echo "$table";
         $sth = $this->connect->prepare("SELECT * FROM $table $params");
         $sth->execute();
         $resultat = $sth->fetchAll(PDO::FETCH_ASSOC);

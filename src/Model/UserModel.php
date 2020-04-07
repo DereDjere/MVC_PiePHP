@@ -9,7 +9,12 @@ use Core\Entity;
 
 class UserModel extends \Core\Entity
 {
-
+    public $relation = [
+        "has_many" => [array("table" => "article", "key" => "user_id")],
+        "has_one" => [array("table" => "tags", "key" => "id_tags")],
+        "has_many" => [array("table" => "article", "key" => "user_id")],
+    ];
+    
     /* public function __construct($params)
     {
         var_dump($params);
@@ -17,6 +22,16 @@ class UserModel extends \Core\Entity
     public function save()
     {
         /* echo $email ."->>". $password; */
+    }
+    public function HasMany($relation)
+    {
+        foreach($relation as $key => $table)
+        {
+            foreach($table as $key => $value)
+            {
+                // Instancier mais pas dans cette class peut etre construct entity a voir
+            }
+        }
     }
     public function checkMail()
     {
@@ -30,7 +45,6 @@ class UserModel extends \Core\Entity
     public function Existmail()
     {
         $orm = new \Core\ORM();
-        echo "test";
         $class = str_replace('\\', '', get_class($this));
         $class = str_replace('Model', '', $class).'s';
         $info = $orm->find(lcfirst($class), $params = array('WHERE' => "email = '" . $this->email . "' AND password = '" . $this->password . "'"));
@@ -48,14 +62,15 @@ class UserModel extends \Core\Entity
         $class = str_replace('\\', '', get_class($this));
         $class = str_replace('Model', '', $class).'s';
         $sql = $orm->find(lcfirst($class), $params = array('WHERE' => "email = '" . $this->email . "'"));
+
+        session_start();
         foreach($sql as $key => $value)
         {
             /* var_dump($key); */
             /* var_dump($value); */
             foreach($value as $k => $val)
             {
-                var_dump($k);
-                var_dump($val);
+                $_SESSION[$k] = $val;
             }
         }
     }

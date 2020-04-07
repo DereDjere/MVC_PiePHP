@@ -29,6 +29,7 @@ class UserController extends \Core\Controller
     }
     public function loginAction()
     {
+        /* session_start(); */
         $params = $this->request;
         if ($params['email'] && $params['password'])
         {
@@ -39,7 +40,10 @@ class UserController extends \Core\Controller
                 {
                     if($model->Existmail() === true)
                     {
+                        
                         $model->UserConnect();
+                        $this->render('show');
+                        /* echo "Connexion a " .$_SESSION['email']; */
                     }
                 }
             }

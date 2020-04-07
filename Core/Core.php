@@ -23,8 +23,6 @@ class Core
         if ($route != null) {
             $control = ucfirst($route['controller']) . 'Controller';
             $action = $route['action'] . 'Action';
-            echo $control . '<br>';
-            echo $action . '<br>';
             /* var_dump(class_exists(ucfirst($control))); */
         
             if (class_exists(ucfirst($control))) {
