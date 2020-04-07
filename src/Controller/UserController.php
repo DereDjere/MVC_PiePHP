@@ -14,7 +14,6 @@ class UserController extends \Core\Controller
     {
         $this->request = \Core\Request::Request();
     }
-
     public function registerpageAction()
     {
         $this->render('register');
@@ -40,8 +39,14 @@ class UserController extends \Core\Controller
                 {
                     if($model->Existmail() === true)
                     {
-                        
-                        $model->UserConnect();
+                        /* $model->HasMany(); */
+                        $id = $model->UserConnect();
+                        if(isset($id))
+                        {
+                            $params['id'] = $id;
+                            $model = new \Model\UserModel($params);
+                            /* var_dump($model); */
+                        }
                         $this->render('show');
                         /* echo "Connexion a " .$_SESSION['email']; */
                     }

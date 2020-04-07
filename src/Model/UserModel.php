@@ -10,9 +10,9 @@ use Core\Entity;
 class UserModel extends \Core\Entity
 {
     public $relation = [
-        "has_many" => [array("table" => "article", "key" => "user_id")],
+        "has_many" => [array("table" => "article", "key" => "id_users")],
         "has_one" => [array("table" => "tags", "key" => "id_tags")],
-        "has_many" => [array("table" => "article", "key" => "user_id")],
+        "many_to_many" => [array("table" => "article", "key" => "user_id")],
     ];
     
     /* public function __construct($params)
@@ -23,16 +23,11 @@ class UserModel extends \Core\Entity
     {
         /* echo $email ."->>". $password; */
     }
-    public function HasMany($relation)
+    public function HasMany()
     {
-        foreach($relation as $key => $table)
-        {
-            foreach($table as $key => $value)
-            {
-                // Instancier mais pas dans cette class peut etre construct entity a voir
-            }
-        }
-    }
+        return $this->HasMany();
+        
+    } 
     public function checkMail()
     {
         if (filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
@@ -73,5 +68,6 @@ class UserModel extends \Core\Entity
                 $_SESSION[$k] = $val;
             }
         }
+        return $_SESSION['id'];
     }
 }

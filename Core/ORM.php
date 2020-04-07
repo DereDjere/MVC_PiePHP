@@ -28,6 +28,7 @@ class ORM
         $sth = $this->connect->prepare("SELECT * FROM $table WHERE id = $id");
         $sth->execute();
         $resultat = $sth->fetchAll(PDO::FETCH_ASSOC);
+        
         return $resultat;
         /* $db = $this->DBase->connectBdd(); */
         /* $sth = $db->query('SELECT * FROM '.$table.' WHERE id='.$id.')');
@@ -68,14 +69,18 @@ class ORM
         'ORDER BY' => '',
         'LIMIT' => ''
     ))
+    
     {
+        var_dump($parametre);
         foreach($parametre as $key => $value)
         {
             if(!empty($value))
             {
-                $params = "$key $value";
+              $params = $key . ' ' . $value;
+              echo "<h1>$params</h1>";
             }
         }
+        /* var_dump($params); */
         $sth = $this->connect->prepare("SELECT * FROM $table $params");
         $sth->execute();
         $resultat = $sth->fetchAll(PDO::FETCH_ASSOC);

@@ -11,8 +11,12 @@ Class Request
             return $secupost;
         } 
         if ($_GET) {
-            $secuget = htmlspecialchars(trim(stripslashes($_GET)));
+            $secuget = array(htmlspecialchars(trim(stripslashes($_GET))));
             return $secuget;
+        }
+        if ($_SESSION) {
+            $secuget = array(htmlspecialchars(trim(stripslashes($_SESSION))));
+            return $secuget; 
         }
     }
 }

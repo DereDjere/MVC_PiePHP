@@ -9,3 +9,4 @@ Router::connect('/SC_Project/Project/MVC_PiePHP/index' , ['controller'=>'user','
 Router::connect('/SC_Project/Project/MVC_PiePHP/login' , ['controller'=>'user','action'=>'loginpage']);
 Router::connect('/SC_Project/Project/MVC_PiePHP/user/register' , ['controller'=>'user','action'=>'register']);
 Router::connect('/SC_Project/Project/MVC_PiePHP/user/login' , ['controller'=>'user','action'=>'login']);
+Router::connect('/SC_Project/Project/MVC_PiePHP/display' , ['controller'=>'user','action'=>'display']);
