@@ -71,13 +71,12 @@ class ORM
     ))
     
     {
-        var_dump($parametre);
         foreach($parametre as $key => $value)
         {
             if(!empty($value))
             {
               $params = $key . ' ' . $value;
-              echo "<h1>$params</h1>";
+              /* echo "<h1>$params</h1>"; */
             }
         }
         /* var_dump($params); */

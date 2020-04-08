@@ -43,35 +43,60 @@ class Entity
                     var_dump($value);
                     
                 }
-            } */
+            } */    
             $this->has_many_table = $this->relation['has_many'][0]['table'];
-            $this->many_key = $this->relation['has_many'][0]['key'];
+            $this->has_many_key = $this->relation['has_many'][0]['key'];
+            $has_many_table = $this->relation['has_many'][0]['table'];
             /* var_dump($has_many); */
             $orm = new ORM();
             $class = str_replace('\\', '', get_class($this));
             $result = $orm->find($this->has_many_table . 's', array("WHERE " => "$this->has_many_key = $this->id"));
-            var_dump($result);
+            /* var_dump($result); */
             foreach($result as $key => $value)
             {
                 foreach ($value as $key => $val) {
-                    $this->has_many_table->$key = $val;
+                    $this->$has_many_table[$key] = $val;
+                    /* print_r($this->article); */
+                }
+            }
+        }
+       if (array_key_exists('has_one', $this->relation) && isset($this->id)) {
+             
+            $this->has_one_table = $this->relation['has_one'][0]['table'];
+            $this->has_one_key = $this->relation['has_one'][0]['key'];
+            $has_one_table = $this->relation['has_one'][0]['table'];
+
+            $orm = new ORM();
+            $class = str_replace('\\', '', get_class($this));
+            $result = $orm->find($this->has_one_table, array("WHERE " => "$this->has_one_key = $this->id"));
+ 
+            foreach($result as $key => $value)
+            {
+                foreach ($value as $key => $val) {
+                    $this->$has_one_table[$key] = $val;
+                    /* print_r($this->article); */
                 }
             }
         }
 
 
+
         /* $this->class = $class; */
     }
-    public function HasMany()
+    public function HasManyEntity()
     {
         // VOIR SI POSSIBILITE DE FUNCTION POUR HASMANY
-        $orm = new ORM();
+        /* $orm = new ORM();
         $class = str_replace('\\', '', get_class($this));
         $class = lcfirst(str_replace('Model', '', $class . 's'));
-        $result = $orm->find($class, array("INNER JOIN $this->has_many_table ON $this->has_many_key = id"));
+        $result = $orm->find($class, array("INNER JOIN $this->has_many_table ON $this->has_many_key = $class.id")); */
     }
     public function HasOne()
     {
+        /* $orm = new ORM();
+        $class = str_replace('\\', '', get_class($this));
+        $class = lcfirst(str_replace('Model', '', $class . 's'));
+        $result = $orm->find($class, array("INNER JOIN $this->has_one_table ON $this->has_many_key = $class.id")); */
     }
     public function ManyToMany()
     {

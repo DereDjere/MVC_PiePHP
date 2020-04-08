@@ -25,7 +25,7 @@ class UserModel extends \Core\Entity
     }
     public function HasMany()
     {
-        return $this->HasMany();
+        return $this->HasManyEntity();
         
     } 
     public function checkMail()

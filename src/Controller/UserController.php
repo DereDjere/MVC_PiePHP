@@ -26,6 +26,10 @@ class UserController extends \Core\Controller
     {
         $this->render('login');
     }
+    public function articleAction()
+    {
+
+    }
     public function loginAction()
     {
         /* session_start(); */
@@ -45,9 +49,10 @@ class UserController extends \Core\Controller
                         {
                             $params['id'] = $id;
                             $model = new \Model\UserModel($params);
+                            var_dump($model->article);
                             /* var_dump($model); */
                         }
-                        $this->render('show');
+                        $this->render('show', ['model' => $model]);
                         /* echo "Connexion a " .$_SESSION['email']; */
                     }
                 }
