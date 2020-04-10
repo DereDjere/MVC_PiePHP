@@ -1,62 +1,41 @@
 <?php
 
 namespace Core;
-/* 
-use Core\ORM; */
 
 class Entity
 {
     public function __construct($params)
     {
-        /* echo 'test'; */
 
-        /* var_dump($this->class); */
-        /* var_dump($params); */
-        /* var_dump($params); */
         if (array_key_exists('id', $params)) {
-            /* echo "id"; 
-            var_dump($params);  */
+ 
             $orm = new ORM();
             $class = str_replace('\\', '', get_class($this));
             $result = $orm->read(lcfirst(str_replace('Model', '', $class . 's')), $params['id']);
-            /* var_dump($result); */
             foreach ($result as $key => $value) {
                 foreach ($value as $key => $val) {
                     $this->$key = $val;
-                    /* var_dump($this->$key); */
-                    /* var_dump($key);
-                    var_dump($val); */
+  
                 }
             }
         } else {
             foreach ($params as $key => $value) {
                 $this->$key = $value;
-                /* var_dump($this->$key); */
             }
         }
-        /* var_dump($this->relation); */
+
         if (array_key_exists('has_many', $this->relation) && isset($this->id)) {
-            /* foreach ($this->relation['has_many'] as $key => $val) {
-                foreach ($val as $key => $value) {
-                    
-                    var_dump($key);
-                    var_dump($value);
-                    
-                }
-            } */    
+   
             $this->has_many_table = $this->relation['has_many'][0]['table'];
             $this->has_many_key = $this->relation['has_many'][0]['key'];
             $has_many_table = $this->relation['has_many'][0]['table'];
-            /* var_dump($has_many); */
             $orm = new ORM();
             $class = str_replace('\\', '', get_class($this));
             $result = $orm->find($this->has_many_table . 's', array("WHERE " => "$this->has_many_key = $this->id"));
-            /* var_dump($result); */
             foreach($result as $key => $value)
             {
                 foreach ($value as $key => $val) {
                     $this->$has_many_table[$key] = $val;
-                    /* print_r($this->article); */
                 }
             }
         }
@@ -74,41 +53,27 @@ class Entity
             {
                 foreach ($value as $key => $val) {
                     $this->$has_one_table[$key] = $val;
-                    /* print_r($this->article); */
                 }
             }
         }
-
-
-
-        /* $this->class = $class; */
-    }
-    public function HasManyEntity()
-    {
-        // VOIR SI POSSIBILITE DE FUNCTION POUR HASMANY
-        /* $orm = new ORM();
-        $class = str_replace('\\', '', get_class($this));
-        $class = lcfirst(str_replace('Model', '', $class . 's'));
-        $result = $orm->find($class, array("INNER JOIN $this->has_many_table ON $this->has_many_key = $class.id")); */
-    }
-    public function HasOne()
-    {
-        /* $orm = new ORM();
-        $class = str_replace('\\', '', get_class($this));
-        $class = lcfirst(str_replace('Model', '', $class . 's'));
-        $result = $orm->find($class, array("INNER JOIN $this->has_one_table ON $this->has_many_key = $class.id")); */
-    }
-    public function ManyToMany()
-    {
-        // VOIR SI POSSIBILITE DE FUNCTION POUR ManyToMany
-    }
-    function relationid()
-    {
+        if (array_key_exists('many_to_many', $this->relation) && isset($this->id)) {
+            $this->has_one_table = $this->relation['many_to_many'][0]['table'];
+            $this->has_one_table2 = $this->relation['many_to_many'][0]['table2'];
+            $this->many_to_many_key = $this->relation['many_to_many'][0]['key'];
+            $many_to_many_table = $this->relation['many_to_many'][0]['table'];
+            $orm = new ORM();
+            $class = str_replace('\\', '', get_class($this));
+            $result = $orm->read_all($this->many_to_many_table."_".$this->has_one_table2);
+            foreach($result as $key => $value)
+            {
+                foreach ($value as $key => $val) {
+                    $this->$has_one_table[$key] = $val;
+                }
+            }
+        }
     }
     public function create()
     {
-        // Determiner un class grace a getclass plus au dessus
-        // Appel de L'ORM pour abstraire
         $orm = new ORM();
         $class = str_replace('\\', '', get_class($this));
         $res = $orm->create(lcfirst(str_replace('Model', '', $class . 's')), get_object_vars($this));

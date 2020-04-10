@@ -12,7 +12,7 @@ class UserModel extends \Core\Entity
     public $relation = [
         "has_many" => [array("table" => "article", "key" => "id_users")],
         "has_one" => [array("table" => "tags", "key" => "id_tags")],
-        "many_to_many" => [array("table" => "article", "key" => "user_id")],
+        "many_to_many" => [array("table" => "article", "table2" => "tags")],
     ];
     
     /* public function __construct($params)
@@ -25,7 +25,6 @@ class UserModel extends \Core\Entity
     }
     public function HasMany()
     {
-        return $this->HasManyEntity();
         
     } 
     public function checkMail()
