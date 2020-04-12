@@ -5,8 +5,6 @@ namespace Model;
 use Core\Core;
 use Core\Entity;
 
-/* use \Core\Entity; */
-
 class UserModel extends \Core\Entity
 {
     public $relation = [
@@ -15,10 +13,7 @@ class UserModel extends \Core\Entity
         "many_to_many" => [array("table" => "article", "table2" => "tags")],
     ];
     
-    /* public function __construct($params)
-    {
-        var_dump($params);
-    } */
+
     public function save()
     {
         /* echo $email ."->>". $password; */
@@ -60,8 +55,6 @@ class UserModel extends \Core\Entity
         session_start();
         foreach($sql as $key => $value)
         {
-            /* var_dump($key); */
-            /* var_dump($value); */
             foreach($value as $k => $val)
             {
                 $_SESSION[$k] = $val;

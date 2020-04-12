@@ -1,12 +1,5 @@
 <?php
 
-/* namespace Controller; */
-
-/* use Core\Controller;
-use Core\Core; */
-/* use Core\Entity; */
-/* use Model\UserModel; */
-
 class UserController extends \Core\Controller
 {
 
@@ -32,7 +25,7 @@ class UserController extends \Core\Controller
     }
     public function loginAction()
     {
-        /* session_start(); */
+
         $params = $this->request;
         if ($params['email'] && $params['password'])
         {
@@ -43,17 +36,17 @@ class UserController extends \Core\Controller
                 {
                     if($model->Existmail() === true)
                     {
-                        /* $model->HasMany(); */
+    
                         $id = $model->UserConnect();
                         if(isset($id))
                         {
                             $params['id'] = $id;
                             $model = new \Model\UserModel($params);
-                            var_dump($model->article);
-                            /* var_dump($model); */
+                           /*  var_dump($model->article); */
+           
                         }
                         $this->render('show', ['model' => $model]);
-                        /* echo "Connexion a " .$_SESSION['email']; */
+                
                     }
                 }
             }
@@ -71,14 +64,6 @@ class UserController extends \Core\Controller
             if (!empty($_POST['email']) && !empty($_POST['password'])) {
                 $model = new \Model\UserModel($params);
                 if ($model->checkmail() === true) {
-                    /* if($model->Existmail() === true)
-                    {
-
-                    }
-                    else
-                    {
-                        self::$_render = "Email deja utilliser." . PHP_EOL;
-                    } */
                     $id = $model->create();
                     var_dump($id);
                     self::$_render = "Votre  compte a ete  cree." . PHP_EOL;
@@ -107,5 +92,16 @@ class UserController extends \Core\Controller
             }
         } else {
         }
+    }
+    public function disconnectAction()
+    {
+
+        session_start();
+        session_destroy();
+        $this->render('login');
+    }
+    public function update_pageAction()
+    {
+        $this->render('update');
     }
 }

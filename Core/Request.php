@@ -14,9 +14,6 @@ Class Request
             $secuget = array(htmlspecialchars(trim(stripslashes($_GET))));
             return $secuget;
         }
-        /* if ($_SESSION) {
-            $secuget = array(htmlspecialchars(trim(stripslashes($_SESSION))));
-            return $secuget; 
-        } */
+
     }
 }

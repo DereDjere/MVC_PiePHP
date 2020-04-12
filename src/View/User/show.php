@@ -9,5 +9,13 @@
     <h1><?php 
     /* session_start(); */
     echo $_SESSION['email'] ?></h1>
+    <form action="/SC_Project/Project/MVC_PiePHP/user/updatepage">
+    <button type="submit">Modifier</button>
+    </form>
+    <form action="/SC_Project/Project/MVC_PiePHP/disconnected">
+    <button type="submit">Disconnect</button>
+    </form>
+    
+    
 </body>
 </html>

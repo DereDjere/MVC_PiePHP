@@ -14,13 +14,10 @@ class ORM
     }
     public function create($table, $fields)
     {   
-        var_dump($fields);
         $colonne = implode(',', array_keys($fields));
         $value = implode("','", $fields);
         $sth = $this->connect->prepare("INSERT INTO $table ($colonne) VALUES ('$value')");
         $sth->execute();
-        /* $fetch = $sth->fetchAll(PDO::FETCH_ASSOC); */
-        /* return $fetch; */
         return $this->connect->lastInsertId();
     }
     public function read($table, $id)
@@ -28,12 +25,7 @@ class ORM
         $sth = $this->connect->prepare("SELECT * FROM $table WHERE id = $id");
         $sth->execute();
         $resultat = $sth->fetchAll(PDO::FETCH_ASSOC);
-        
         return $resultat;
-        /* $db = $this->DBase->connectBdd(); */
-        /* $sth = $db->query('SELECT * FROM '.$table.' WHERE id='.$id.')');
-        $fetch = $sth->fetchAll(\PDO::FETCH_ASSOC);
-        return $fetch;  */
     }
     public function update($table, $fields)
     {
@@ -68,18 +60,15 @@ class ORM
         'WHERE' => '',
         'ORDER BY' => '',
         'LIMIT' => ''
-    ))
-    
+    ))   
     {
         foreach($parametre as $key => $value)
         {
             if(!empty($value))
             {
               $params = $key . ' ' . $value;
-              /* echo "<h1>$params</h1>"; */
             }
         }
-        /* var_dump($params); */
         $sth = $this->connect->prepare("SELECT * FROM $table $params");
         $sth->execute();
         $resultat = $sth->fetchAll(PDO::FETCH_ASSOC);

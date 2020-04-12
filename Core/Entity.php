@@ -23,8 +23,9 @@ class Entity
                 $this->$key = $value;
             }
         }
+        // RELATION NON FONCTIONNEL
 
-        if (array_key_exists('has_many', $this->relation) && isset($this->id)) {
+        /* if (array_key_exists('has_many', $this->relation) && isset($this->id)) {
    
             $this->has_many_table = $this->relation['has_many'][0]['table'];
             $this->has_many_key = $this->relation['has_many'][0]['key'];
@@ -70,7 +71,7 @@ class Entity
                     $this->$has_one_table[$key] = $val;
                 }
             }
-        }
+        } */
     }
     public function create()
     {
